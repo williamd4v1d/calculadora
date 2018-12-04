@@ -1,5 +1,5 @@
-
 var Calculadora = {
+
 
   pantalla: document.getElementById("display").innerHTML,
   a: 0,
@@ -15,9 +15,9 @@ var Calculadora = {
     function(){
       this.onClick();
     }
-  )
+  ),
 
-  onClick: function(){
+    onClick: function(){
     document.getElementById("0").addEventListener("click", function(){
       Calculadora.cifra("0")
     });
@@ -72,15 +72,15 @@ var Calculadora = {
     document.getElementById("punto").addEventListener("click", function(){
       Calculadora.punto()
     });
-  }
+  },
 
-  efectoteclado: function(tecla){
-  		document.getElementById(tecla).style.transform="scale(0.9)";
-  		setTimeout(function() {
+    efectoteclado: function(tecla){
+      document.getElementById(tecla).style.transform="scale(0.9)";
+      setTimeout(function() {
       document.getElementById(tecla).style.transform="scale(1)";}, 250);
-  	}
+    },
 
-  	cifra: function(valor){
+    cifra: function(valor){
       this.efectoteclado(valor);
       if(this.signo == 1 && this.valida == 0){
         this.digitos += 1,
@@ -99,63 +99,152 @@ var Calculadora = {
      }
       this.pantdisplay();
      }
-   }
+   },
+
+   mas: function(){
+        this.efectoteclado("mas");
+        this.a += Number(this.pantalla),
+        this.pantalla = "",
+        this.seleccion = 1,
+        this.operacion = 0,
+        this.signo = 0,
+        this.b = 0,
+        this.operacion = 0,
+        this.decimal = 0,
+        this.pantdisplay();
+    },
+
+   menos: function(){
+   this.efectoteclado("menos");
+   this.a = Number(this.pantalla);
+   this.pantalla = "",
+   this.seleccion = 2,
+   this.operacion = 0,
+   this.signo = 0,
+   this.b = 0,
+   this.operacion = 0,
+   this.decimal = 0,
+   this.pantdisplay();
+},
+
+   por: function(){
+      this.efectoteclado("por");
+      this.a = Number(this.pantalla),
+      this.pantalla = "",
+      this.seleccion = 3,
+      this.operacion = 0,
+      this.signo = 0,
+      this.b = 0,
+      this.operacion = 0,
+      this.decimal = 0,
+      this.pantdisplay();
+  },
+
+   dividido: function(){
+        this.efectoteclado("dividido");
+        this.a = Number(this.pantalla),
+        this.pantalla = "",
+        this.seleccion = 4,
+        this.operacion = 0,
+        this.signo = 0,
+        this.b = 0,
+        this.operacion = 0,
+        this.decimal = 0,
+        this.pantdisplay();
+    },
 
    igual: function(){
-		 this.efectoteclado("igual");
-		 switch(this.seleccion){
+     this.efectoteclado("igual");
+     switch(this.seleccion){
       case 1:
-					if(this.operacion == 0){
-						this.b = Number(this.pantalla),
-						this.pantalla = this.a + Number(this.pantalla),
-						this.operacion = 1,
-						this.a = 0;
-					}else{
-						this.pantalla = Number(this.pantalla)+this.b;
-					}
-				break;
+          if(this.operacion == 0){
+            this.b = Number(this.pantalla),
+            this.pantalla = this.a + Number(this.pantalla),
+            this.operacion = 1,
+            this.a = 0;
+          }else{
+            this.pantalla = Number(this.pantalla)+this.b;
+          }
+        break;
         case 2:
-					if(this.operacion == 0){
-						this.b = Number(this.pantalla),
-						this.pantalla = this.a - Number(this.pantalla),
-						this.operacion = 1,
-						this.a = 0;
-					}else{
-						this.pantalla = Number(this.pantalla)-this.b;
-					}
-				break;
+          if(this.operacion == 0){
+            this.b = Number(this.pantalla),
+            this.pantalla = this.a - Number(this.pantalla),
+            this.operacion = 1,
+            this.a = 0;
+          }else{
+            this.pantalla = Number(this.pantalla)-this.b;
+          }
+        break;
         case 3:
-					if(this.operacion == 0){
-						this.b = Number(this.pantalla),
-						this.pantalla = this.a * Number(this.pantalla),
-						this.operacion = 1,
-						this.a = 0;
-					}else{
-						this.pantalla = Number(this.pantalla)*this.b;
-					}
-				break;
+          if(this.operacion == 0){
+            this.b = Number(this.pantalla),
+            this.pantalla = this.a * Number(this.pantalla),
+            this.operacion = 1,
+            this.a = 0;
+          }else{
+            this.pantalla = Number(this.pantalla)*this.b;
+          }
+        break;
         case 4:
-					if(this.operacion == 0){
-						this.b = Number(this.pantalla),
-						this.pantalla = this.a / Number(this.pantalla),
-						this.operacion = 1,
-						this.a = 0;
-					}else{
-						this.pantalla = Number(this.pantalla)/this.b;
-					}
-				break;
-			default:
-				break;
+          if(this.operacion == 0){
+            this.b = Number(this.pantalla),
+            this.pantalla = this.a / Number(this.pantalla),
+            this.operacion = 1,
+            this.a = 0;
+          }else{
+            this.pantalla = Number(this.pantalla)/this.b;
+          }
+        break;
+      default:
+        break;
     }
     this.pantdisplay();
-  }
+  },
 
-  pantdisplay: function(){
-    	if(this.pantalla.toString().length > this.digitos){
-    		this.pantalla = this.pantalla.toString().substring(0,8);
-    		}
-    		document.getElementById("display").innerHTML = this.pantalla;
-    	}
+   on: function(){
+    this.efectoteclado("on");
+    this.a = 0,
+    this.b = 0,
+    this.pantalla = "0",
+    this.decimal = 0,
+    this.signo = 0,
+    this.valida = 0,
+    this.digitos = 8,
+    this.operacion = 0,
+    this.seleccion = 0,
+    this.resultado = 0,
+    this.pantdisplay();
+  },
 
-}
-Calculadora.inicio();
+   sign: function(){
+    this.efectoteclado("sign");
+    if(this.pantalla != 0){
+      if(this.signo == 0){
+        this.pantalla = "-" + this.pantalla,
+        this.signo = 1;
+      }else{
+        this.pantalla = this.pantalla.slice(1);
+        this.signo = 0;
+      }
+    }
+    this.pantdisplay();
+  },
+
+   punto: function(){
+      this.efectoteclado("punto");
+      if(this.decimal == 0){
+        this.pantalla += ".";
+      }
+      this.decimal = 1,
+      this.pantdisplay();
+    },
+
+   pantdisplay: function(){
+      if(this.pantalla.toString().length > this.digitos){
+        this.pantalla = this.pantalla.toString().substring(0,8);
+        }
+        document.getElementById("display").innerHTML = this.pantalla;
+      }
+    }
+    Calculadora.inicio();
